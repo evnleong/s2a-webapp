@@ -1,0 +1,7 @@
+#Ignore feature branches and environments
+.env 
+/flaskvEnv/
+testing.py
+main copy.py
+eventid.py
+customfields.py
