@@ -6,9 +6,11 @@ from datetime import datetime
 from flask_cors import CORS
 
 app = Flask(__name__)
+# Allow CORS and load env variables
 load_dotenv()
 CORS(app)
 auth_token = os.environ.get("auth_token")
+flask_passkey = os.environ.get("flask_passkey")
 
 # Authorization and GET request headers for HTTP
 headers = {
@@ -34,6 +36,15 @@ jsontemplate = {
         "custom_fields": {},
     }
 }
+
+
+# Authorize access to post route
+@app.before_request
+def authorize_user():
+    if request.method == "POST" and request.path == "/post":
+        provided_passkey = request.headers.get("Passkey")
+        if provided_passkey != flask_passkey:
+            return jsonify({"message": "Authentication failed"}), 401
 
 
 # Accept incoming POST requests
