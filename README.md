@@ -1,4 +1,4 @@
-# StarRez and Asana Integration App
+# StarRez and Asana Integration App (S2A)
 
 
 ## Background: 
